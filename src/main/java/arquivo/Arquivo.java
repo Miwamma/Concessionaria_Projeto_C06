@@ -60,7 +60,7 @@ public class Arquivo {
     // removendo por indicie aviao e salvando
     public void removerAviao(ArrayList<Aviao> avioes, int indice) {
         if (indice >= 0 && indice < avioes.size()) {
-            // Remove da lista
+            // removendo da lista
             avioes.remove(indice);
 
             // reescreve o arquivo completo
