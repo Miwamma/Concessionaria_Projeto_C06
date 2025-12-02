@@ -4,7 +4,7 @@ import comunicacao.ModuloComunicacao;
 
 public abstract class Veiculo {
 
-    // Atributos encapsulados
+    //atributos do veiculo
     private int id;
     private String marca;
     private String modelo;
@@ -14,7 +14,7 @@ public abstract class Veiculo {
     private String codigoComunicacao;
     protected ModuloComunicacao comunicador;
 
-    // Construtor completo
+    //construtor
     public Veiculo(int id, String marca, String modelo, int ano, int potencia, int velocidadeMaxima, String codigoComunicacao) {
         this.id = id;
         this.marca = marca;
@@ -31,7 +31,7 @@ public abstract class Veiculo {
         comunicador.transmitir(mensagem, destino);
     }
 
-    // Getters
+    //getters
     public int getId() {
         return id;
     }

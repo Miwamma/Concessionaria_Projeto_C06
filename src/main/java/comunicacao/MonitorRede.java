@@ -35,7 +35,6 @@ public class MonitorRede extends Thread {
         return mensagens;
     }
 
-
     public void desligar() {
         ativo = false;
     }
