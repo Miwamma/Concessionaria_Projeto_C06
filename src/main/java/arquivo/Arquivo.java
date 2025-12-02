@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Arquivo {
 
-    // Caminhos dos arquivos de persistência
+    // persistencia arquivo path
     private final String AVIAO_PATH = "src/data/veiculos_aviao.txt";
     private final String CARRO_PATH = "src/data/veiculos_carro.txt";
 
@@ -16,10 +16,7 @@ public class Arquivo {
         criarArquivosSeNaoExistir();
     }
 
-    // ==========================================================
-    //  CRIAÇÃO DOS ARQUIVOS
-    // ==========================================================
-
+    // criando arquivo
     private void criarArquivosSeNaoExistir() {
         try {
             File aviaoFile = new File(AVIAO_PATH);
@@ -40,9 +37,7 @@ public class Arquivo {
         }
     }
 
-    // ==========================================================
-    //  SALVAR AVIAO
-    // ==========================================================
+    // salvando aviao
     public void salvarAviao(Aviao a) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(AVIAO_PATH, true))) {
 
@@ -62,9 +57,61 @@ public class Arquivo {
         }
     }
 
-    // ==========================================================
-    //  SALVAR CARRO
-    // ==========================================================
+    // removendo por indicie aviao e salvando
+    public void removerAviao(ArrayList<Aviao> avioes, int indice) {
+        if (indice >= 0 && indice < avioes.size()) {
+            // Remove da lista
+            avioes.remove(indice);
+
+            // reescreve o arquivo completo
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(AVIAO_PATH, false))) {
+                for (Aviao a : avioes) {
+                    bw.write(
+                            a.getId() + ";" +
+                                    a.getMarca() + ";" +
+                                    a.getModelo() + ";" +
+                                    a.getAno() + ";" +
+                                    a.getPotencia() + ";" +
+                                    a.getVelocidadeMaxima() + ";" +
+                                    a.getCodigoComunicacao()
+                    );
+                    bw.newLine();
+                }
+                System.out.println("✓ Avião removido e arquivo atualizado!");
+            } catch (Exception e) {
+                System.out.println("[ERRO] Não foi possível atualizar o arquivo de aviões!");
+            }
+        }
+    }
+
+    // removendo carro por indice e salvando
+    public void removerCarro(ArrayList<Carro> carros, int indice) {
+        if (indice >= 0 && indice < carros.size()) {
+            //removendo lista
+            carros.remove(indice);
+
+            // reescreve o arquivo completo
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(CARRO_PATH, false))) {
+                for (Carro c : carros) {
+                    bw.write(
+                            c.getId() + ";" +
+                                    c.getMarca() + ";" +
+                                    c.getModelo() + ";" +
+                                    c.getAno() + ";" +
+                                    c.getPotencia() + ";" +
+                                    c.getVelocidadeMaxima() + ";" +
+                                    c.getCodigoComunicacao()
+                    );
+                    bw.newLine();
+                }
+                System.out.println("✓ Carro removido e arquivo atualizado!");
+            } catch (Exception e) {
+                System.out.println("[ERRO] Não foi possível atualizar o arquivo de carros!");
+            }
+        }
+    }
+
+    // salvando carro
     public void salvarCarro(Carro c) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(CARRO_PATH, true))) {
 
@@ -84,9 +131,7 @@ public class Arquivo {
         }
     }
 
-    // ==========================================================
-    //  CARREGAR AVIÕES
-    // ==========================================================
+    // carregando aviao
     public ArrayList<Aviao> carregarAvioes() {
         ArrayList<Aviao> lista = new ArrayList<>();
 
@@ -115,9 +160,7 @@ public class Arquivo {
         return lista;
     }
 
-    // ==========================================================
-    //  CARREGAR CARROS
-    // ==========================================================
+    //carregando carro
     public ArrayList<Carro> carregarCarros() {
         ArrayList<Carro> lista = new ArrayList<>();
 

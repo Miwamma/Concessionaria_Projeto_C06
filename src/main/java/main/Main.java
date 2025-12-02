@@ -197,13 +197,13 @@ public class Main {
                     break;
 
                 case 4:
-                    // removendo veículo
+                    // removendo veículo usando o método que já atualiza o arquivo
                     System.out.print("Tipo (1 - Avião | 2 - Carro): ");
                     int tipoRemover = sc.nextInt();
                     sc.nextLine();
 
-                    if (tipoRemover == 1) {
-                        System.out.println("Aviões disponíveis:");
+                    if (tipoRemover == 1 && !avioes.isEmpty()) {
+                        System.out.println("\n--- Aviões Disponíveis ---");
                         for (int i = 0; i < avioes.size(); i++) {
                             System.out.println(i + " - " + avioes.get(i).getModelo());
                         }
@@ -212,12 +212,10 @@ public class Main {
                         int remover = sc.nextInt();
                         sc.nextLine();
 
-                        if (remover >= 0 && remover < avioes.size()) {
-                            avioes.remove(remover);
-                            System.out.println("Avião removido!");
-                        }
-                    } else if (tipoRemover == 2) {
-                        System.out.println("Carros disponíveis:");
+                        arq.removerAviao(avioes, remover);
+
+                    } else if (tipoRemover == 2 && !carros.isEmpty()) {
+                        System.out.println("\n--- Carros Disponíveis ---");
                         for (int i = 0; i < carros.size(); i++) {
                             System.out.println(i + " - " + carros.get(i).getModelo());
                         }
@@ -226,10 +224,10 @@ public class Main {
                         int remover = sc.nextInt();
                         sc.nextLine();
 
-                        if (remover >= 0 && remover < carros.size()) {
-                            carros.remove(remover);
-                            System.out.println("Carro removido!");
-                        }
+                        arq.removerCarro(carros, remover);
+
+                    } else {
+                        System.out.println("Nenhum veículo disponível ou tipo inválido.");
                     }
                     break;
 
